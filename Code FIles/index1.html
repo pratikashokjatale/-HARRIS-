@@ -1,0 +1,272 @@
+<html>
+  <head>
+    <style>
+       
+      .fig {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        margin: auto;
+      }
+      .mouth {
+        height: 25px;
+        width: 55px;
+        float: center;
+        position: relative;
+        left: 310px;
+        top: 195px;
+        z-index: 100;
+        background-color: #0c0c0c;
+        overflow: hidden;
+        border-radius: 0px 0px 30px 30px;
+        position: absolute;
+        transition: all 0.5s ease-in-out;
+        animation: none;
+      }
+
+      .mouth #teeth {
+        height: 13px;
+        width: 110px;
+        position: relative;
+        top: -5px;
+        left: -5px;
+        background-color: #fff;
+        transform: rotate(-3deg);
+      }
+
+      .mouth #tongue {
+        height: 15px;
+        width: 110px;
+        background-color: #f41800;
+        border-radius: 10px;
+        position: relative;
+        left: -8px;
+        top: 7px;
+      }
+
+      .button-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+      
+      .my-img1 {
+        transform: rotate(90deg);
+        margin-top: -170px;
+        padding: 5px;
+        margin-left: 340px;
+      }
+     
+.mouth2{
+    rotate : 90deg;
+  
+}
+.mouth2 #mouth2{
+    left :80px;
+    top : -375px;
+}
+
+      .my-img2 {
+        transform: rotate(-90deg);
+        margin-top: -680px;
+        padding: 5px;
+        margin-left: -350px;
+      }
+      .mouth3{
+        rotate:-90deg;
+       } 
+
+       .mouth3 #mouth3{
+        left :760px;
+        top : -205px;
+
+       }
+
+
+     
+      .my-img3 {
+        transform: rotate(180deg);
+        margin-top: -870px;
+        padding: 5px;
+        margin-left: -10px;
+      }
+.mouth4{
+    rotate:-180deg;
+}
+.mouth4 #mouth4{
+    top :785px;
+    left :140px;
+}
+@keyframes mouthoc {
+
+    0% {
+         height: 25px;
+    }
+   
+    100% {
+         height: 12px;
+    }
+}
+
+
+    </style>
+    <title>PHP Test</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-black">
+    <div class="button-container" align="right">
+      <button id="runButton" onclick="runChatBot()">Run</button>
+      <button id="exitButton" onclick="exitApplication()">Exit</button>
+    </div>
+  <body class="bg-black">
+    <div class="button-container" align="right">
+        <button id="toggleButton">Toggle Animation</button>
+    </div>
+<div class="cntnr">
+
+    <div class="fig">
+      <div class="mouth1"  >
+        <div class="mouth" id="mouth1">
+          <div id="teeth"></div>
+          <div id="tongue"></div>
+        </div>
+      </div>
+      <div class="imgcntr">
+        <img src="face.png" alt="logo"  align="top" width="680" height="280" />
+      </div>
+    </div>
+    <div class="fig">
+        <div class="imgcntr">
+            <img src="face.png" alt="logo" class="my-img1" align="top" width="680" height="280" />
+          </div>
+      <div class="mouth2" >
+        <div class="mouth" id="mouth2">
+          <div id="teeth"></div>
+          <div id="tongue"></div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="fig">
+        <div class="imgcntr">
+            <img src="face.png" alt="logo" class="my-img2" align="top" width="680" height="280" />
+          </div>
+      <div class="mouth3" >
+        <div class="mouth" id="mouth3">
+          <div id="teeth"></div>
+          <div id="tongue"></div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="fig">
+        <div class="imgcntr">
+            <img src="face.png" alt="logo" class="my-img3" align="top" width="680" height="280" />
+          </div>
+      <div class="mouth4" >
+        <div class="mouth" id="mouth4">
+          <div id="teeth"></div>
+          <div id="tongue"></div>
+        </div>
+      </div>
+      
+    </div>
+
+</div>
+<script>
+    var animationInterval;
+
+    document.querySelector('#toggleButton').addEventListener('click', toggleAnimation);
+
+    function toggleAnimation() {
+        var ids = ['#mouth1', '#mouth2', '#mouth3', '#mouth4'];
+        if (animationInterval) {
+            clearInterval(animationInterval);
+            animationInterval = null;
+            ids.forEach(function (id) {
+                var box = document.querySelector(id);
+                box.style.animation = 'none'; // Reset animation for each element
+            });
+        } else {
+            animationInterval = setInterval(startAnimation, 0); // Change interval as needed
+        }
+    }
+
+    function startAnimation() {
+        var ids = ['#mouth1', '#mouth2', '#mouth3', '#mouth4'];
+        ids.forEach(function (id) {
+            var box = document.querySelector(id);
+            box.style.animation = 'mouthoc 0.9s infinite alternate'; // Apply animation to each element
+        });
+    }
+    function runChatBot() {
+        // Send a request to start the chat bot application
+        fetch('/start_chat_bot')
+          .then(response => {
+            if (response.ok) {
+              console.log('Chat bot application started.');
+            } else {
+              console.error('Failed to start chat bot application.');
+            }
+          })
+          .catch(error => {
+            console.error('Error starting chat bot application:', error);
+          });
+      }
+
+      function exitApplication() {
+        // Send a request to stop the chat bot application
+        fetch('/stop_chat_bot')
+          .then(response => {
+            if (response.ok) {
+              console.log('Application exited.');
+            } else {
+              console.error('Failed to exit application.');
+            }
+          })
+          .catch(error => {
+            console.error('Error exiting application:', error);
+          });
+      }
+       function runChatBot() {
+        // Send a request to start the chat bot application
+        fetch('/start_chat_bot')
+          .then(response => {
+            if (response.ok) {
+              console.log('Chat bot application started.');
+            } else {
+              console.error('Failed to start chat bot application.');
+            }
+          })
+          .catch(error => {
+            console.error('Error starting chat bot application:', error);
+          });
+      }
+
+      function exitApplication() {
+        // Send a request to stop the chat bot application
+        fetch('/stop_chat_bot')
+          .then(response => {
+            if (response.ok) {
+              console.log('Application exited.');
+            } else {
+              console.error('Failed to exit application.');
+            }
+          })
+          .catch(error => {
+            console.error('Error exiting application:', error);
+          });
+      }
+</script>
+  </body>
+</html>
